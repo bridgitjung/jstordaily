@@ -13,7 +13,7 @@
       .map(([k, v]) => `<symbol id="i-${k}" viewBox="0 0 24 24">${v}</symbol>`).join('')}</svg>`;
   }
 
-  const logo = (cls = '') => `<a class="logo ${cls}" href="index.html" aria-label="JSTOR Daily home"><img src="assets/emblem.png" alt=""><span class="logo-word">DAILY</span></a>`;
+  const logo = (cls = '', light = false) => `<a class="logo ${cls}" href="index.html" aria-label="JSTOR Daily home"><img src="assets/${light ? 'logo-light' : 'logo'}.png" alt="" width="634" height="200"></a>`;
 
   function subnav(active, extra = '') {
     const links = SECTIONS.map((s) => `<a href="${sectionHref(s)}"${active === s ? ' class="is-active"' : ''}>${s}</a>`).join('');
@@ -84,7 +84,7 @@
     const col = (title, items) => `<div class="footer-col"><h3>${title}</h3><ul>${items.map(([t, h]) => `<li><a href="${h}">${t}</a></li>`).join('')}</ul></div>`;
     return `<footer class="site-footer" id="contact"><div class="wrap">
       <div class="footer-top">
-        <div class="footer-brand">${logo()}<p>JSTOR Daily provides context for current events using scholarship found in JSTOR, a digital library of academic journals, books, and other material. We publish articles grounded in peer-reviewed research and provide free access to that research for all of our readers.</p></div>
+        <div class="footer-brand">${logo('', true)}<p>JSTOR Daily provides context for current events using scholarship found in JSTOR, a digital library of academic journals, books, and other material. We publish articles grounded in peer-reviewed research and provide free access to that research for all of our readers.</p></div>
         ${col('About', [['About JSTOR Daily', '#'], ['Masthead', '#'], ['Submission Guidelines', '#'], ['The JSTOR Daily Sleuth', 'index.html#sleuth'], ['Teaching and Learning Resources', 'teaching.html'], ['American Prison Newspapers', '#']])}
         ${col('Connect', [['Contact the Editors', '#'], ['Newsletter', 'index.html#newsletter'], ['Unsubscribe', '#'], ['Support JSTOR Daily on Patreon', 'https://www.patreon.com/'], ['Advertising and Donations', '#'], ['RSS', '#']])}
       </div>

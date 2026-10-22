@@ -127,11 +127,9 @@ h1, h2, h3, h4, p { margin: 0; }
 .search-field:hover { border-color: var(--ink); }
 .search-toggle-mobile { display: none; }
 
-.logo { display: inline-flex; align-items: center; gap: 6px; color: var(--ink); }
-.logo img { width: 24px; height: 24px; }
-.logo-word { font: 700 30px/1 "Oswald", var(--sans); letter-spacing: 0.01em; }
-.logo-lg img { width: 43px; height: 43px; }
-.logo-lg .logo-word { font-size: 56px; }
+.logo { display: inline-flex; align-items: center; }
+.logo img { width: auto; height: 30px; }
+.logo-lg img { height: 56px; }
 
 .masthead { text-align: center; padding: 24px var(--gutter) 20px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .masthead p { font: 400 12px/1.4 var(--sans); color: var(--muted); }
@@ -498,7 +496,6 @@ figcaption { font: italic 400 13px/1.4 var(--sans); color: var(--muted); }
 .site-footer { background: var(--footer); color: #cfcac2; padding: 64px 0 32px; }
 .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
 .footer-brand { display: flex; flex-direction: column; gap: 14px; max-width: 580px; }
-.footer-brand .logo { color: #fff; }
 .footer-brand p { font: 400 14px/1.57 var(--sans); }
 .footer-col h3 { font: 600 12px/1 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px; }
 .footer-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
@@ -529,8 +526,7 @@ figcaption { font: italic 400 13px/1.4 var(--sans); color: var(--muted); }
   .header-row .logo { justify-self: center; }
   .header-right { gap: 0; }
   .masthead { padding: 16px var(--gutter); }
-  .logo-lg img { width: 32px; height: 32px; }
-  .logo-lg .logo-word { font-size: 40px; }
+  .logo-lg img { height: 40px; }
   .subnav .wrap { gap: 22px; }
 
   .nav-menu-panel { height: 100%; overflow-y: auto; }
