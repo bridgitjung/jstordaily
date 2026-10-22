@@ -270,6 +270,7 @@
       pill.tabIndex = collapsed ? 0 : -1;
       rows.forEach((r) => (r.tabIndex = collapsed ? -1 : 0));
     }
+    setHub(true);
     hub.addEventListener('click', (e) => {
       const b = e.target.closest('[data-th]');
       if (!b) return;

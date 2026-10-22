@@ -94,7 +94,7 @@
   }
 
   function toolhub() {
-    return `<div class="toolhub" id="toolhub">
+    return `<div class="toolhub is-collapsed" id="toolhub">
       <div class="toolhub-panel" role="region" aria-label="Article tools">
         <div class="th-rows">
           <button class="th-row" type="button" data-th="jump">${icon('doc')}<span>Jump to resources</span></button>
