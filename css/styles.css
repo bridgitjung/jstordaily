@@ -561,7 +561,7 @@ figcaption { font: italic 400 13px/1.4 var(--sans); color: var(--muted); }
   .newsletter-copy h2 { font-size: 30px; }
   .newsletter-media img { width: 220px; }
   .subscribe { flex-direction: column; height: auto; gap: 8px; }
-  .subscribe input { height: 50px; border-radius: 2px; }
+  .subscribe input { flex: none; height: 50px; border-radius: 2px; }
   .subscribe .btn { border-radius: 2px; }
   .promo { grid-template-columns: 1fr; }
   .promo img { width: 100%; height: auto; aspect-ratio: 16 / 9; }
