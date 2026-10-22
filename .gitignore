@@ -1,0 +1,7 @@
+# Raw Figma image exports (re-slice with scripts/slice-images.ps1)
+assets/raw/
+
+_dbg_*.html
+_st_*.html
+.DS_Store
+Thumbs.db

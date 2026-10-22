@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Search — JSTOR Daily</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Oswald:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="search">
+  <div id="site-header"></div>
+
+  <main class="wrap" style="padding-bottom:80px">
+    <div class="results-head">
+      <div>
+        <nav class="breadcrumb" aria-label="Breadcrumb" style="margin-bottom:14px"><a href="index.html">Home</a><span class="sep">/</span><span>Search</span><span class="sep" data-q-crumb-sep hidden>/</span><span data-q-crumb></span></nav>
+        <h1 id="results-title">All stories</h1>
+        <p class="results-count" id="results-count" aria-live="polite"></p>
+      </div>
+      <label class="sort">Sort
+        <select id="sort">
+          <option value="relevant">Most relevant</option>
+          <option value="newest">Newest</option>
+          <option value="short">Shortest read</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="chip-row scroll" data-filter-group="#results" style="margin-bottom:32px">
+      <button class="chip is-active" type="button" data-filter="">All</button>
+      <button class="chip" type="button" data-filter="Article">Articles</button>
+      <button class="chip" type="button" data-filter="Series">Series</button>
+      <button class="chip" type="button" data-filter="JSTOR Collection">JSTOR Collections</button>
+      <button class="chip" type="button" data-filter="Reading list|Syllabus|Annotation|Pedagogical essay|Roundup">Teaching resources</button>
+    </div>
+
+    <div class="grid grid-3" id="results"></div>
+    <div class="results-empty" id="results-empty" hidden></div>
+
+    <nav class="pagination" aria-label="Pagination" id="pagination">
+      <a class="pg-arrow" href="#" aria-label="Previous page"><svg class="i" aria-hidden="true"><use href="#i-chevronLeft"/></svg></a>
+      <span class="is-current" aria-current="page">1</span><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><span>…</span><a href="#">9</a>
+      <a class="pg-arrow" href="#" aria-label="Next page"><svg class="i" aria-hidden="true"><use href="#i-chevronRight"/></svg></a>
+    </nav>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    (function () {
+      const q = (new URLSearchParams(location.search).get('q') || '').trim();
+      const words = q.toLowerCase().split(/\s+/).filter((w) => w.length > 1);
+      const all = Object.entries(JD.stories).filter(([id]) => !id.startsWith('t-'));
+      const score = (s) => {
+        const title = s.title.toLowerCase();
+        return words.reduce((n, w) => n + (title.includes(w) ? 2 : 0) + ([s.label, s.cat, s.kind].join(' ').toLowerCase().includes(w) ? 1 : 0), 0);
+      };
+      let hits = all.map(([id, s]) => s).filter((s) => {
+        if (!words.length) return true;
+        const hay = [s.title, s.dek, s.label, s.cat, s.kind, s.tags].join(' ').toLowerCase();
+        return words.every((w) => hay.includes(w));
+      });
+
+      const resultsEl = document.getElementById('results');
+      const emptyEl = document.getElementById('results-empty');
+      const countEl = document.getElementById('results-count');
+      const pager = document.getElementById('pagination');
+
+      if (q) {
+        document.title = `Search results for “${q}” — JSTOR Daily`;
+        document.getElementById('results-title').textContent = `Search results for “${q}”`;
+        document.querySelector('[data-q-crumb]').textContent = `“${q}”`;
+        document.querySelector('[data-q-crumb-sep]').hidden = false;
+      }
+
+      function render(order) {
+        const list = hits.slice();
+        if (order === 'relevant') list.sort((a, b) => score(b) - score(a));
+        if (order === 'short') list.sort((a, b) => (a.time || 99) - (b.time || 99));
+        if (order === 'newest') list.reverse();
+        resultsEl.innerHTML = list.slice(0, 9).map((s) => JD.card(s, { dek: true, cls: 'card-sm' })).join('');
+        setCount(Math.min(list.length, 9), list.length);
+      }
+      function setCount(shown, total) {
+        countEl.textContent = total ? `Showing results 1–${shown} of ${total}` : '';
+        emptyEl.hidden = shown > 0;
+        emptyEl.innerHTML = q
+          ? `No stories match “${JD.esc(q)}” with this filter. Try a broader term, or <a class="kicker-link" href="search.html">browse all stories</a>.`
+          : 'No stories with this filter yet.';
+        pager.hidden = total <= 9 || shown === 0;
+      }
+
+      render('relevant');
+      document.getElementById('sort').addEventListener('change', (e) => {
+        render(e.target.value);
+        document.querySelector('[data-filter-group] .chip').click();
+      });
+      document.addEventListener('jd:filtered', (e) => setCount(e.detail.shown, e.detail.shown));
+      pager.addEventListener('click', (e) => {
+        const a = e.target.closest('a');
+        if (!a) return;
+        e.preventDefault();
+        JD.toast('More pages aren’t part of this prototype');
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Collections on JSTOR — JSTOR Daily</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Oswald:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="collections" data-active="collections">
+  <div id="site-header"></div>
+
+  <main>
+    <section class="page-banner coll-banner"><div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="sep">/</span><span>Collections on JSTOR</span></nav>
+      <div class="page-banner-grid">
+        <div>
+          <h1>Collections on JSTOR</h1>
+          <p class="lede">Collections of images, rare books, primary source documents, ephemera, and other content from partner institutions, shared on JSTOR.</p>
+          <a class="btn btn-dark" href="https://www.jstor.org/" target="_blank" rel="noopener">Learn how your institution can share collections<svg class="i i-sm" aria-hidden="true"><use href="#i-external"/></svg></a>
+        </div>
+        <img src="assets/img/075.jpg" alt="">
+      </div>
+    </div></section>
+
+    <section class="editors-pick"><div class="wrap">
+      <a class="ep-card" href="article.html">
+        <img src="assets/img/076.jpg" alt="">
+        <div class="ep-body">
+          <span class="eyebrow">Editor’s pick</span>
+          <div class="meta"><span class="kind"><svg class="i" aria-hidden="true"><use href="#i-archive"/></svg>JSTOR Collection</span></div>
+          <h2>The Wild West of Papal Conclaves</h2>
+          <p>In the sixteenth and seventeenth century, the death of a pope led to all sorts of chaos, from the destruction of art to armed violence in the streets.</p>
+          <span class="read-time"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>8 min read</span>
+        </div>
+      </a>
+    </div></section>
+
+    <section class="section section-tight"><div class="wrap">
+      <div class="chip-row scroll" data-filter-group="#coll-grid" style="margin-bottom:32px">
+        <button class="chip is-active" type="button" data-filter="">All collections</button>
+        <button class="chip" type="button" data-filter="Politics &amp; History">Politics &amp; History</button>
+        <button class="chip" type="button" data-filter="Arts &amp; Culture">Arts &amp; Culture</button>
+        <button class="chip" type="button" data-filter="Science &amp; Technology">Science &amp; Technology</button>
+        <button class="chip" type="button" data-filter="Education &amp; Society">Education &amp; Society</button>
+      </div>
+      <div class="grid grid-3" id="coll-grid" data-cards="lviv@21,purrfect@29,greenland@77,cabinet@28,stpatrick@25,artdeal@78,ulmann@22,tsar@10,papal@76" data-dek></div>
+      <p class="results-empty" id="coll-empty" hidden>No collection stories in this category yet.</p>
+    </div></section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('jd:filtered', (e) => { document.getElementById('coll-empty').hidden = e.detail.shown > 0; });
+  </script>
+</body>
+</html>
