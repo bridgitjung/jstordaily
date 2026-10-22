@@ -262,7 +262,7 @@ h1, h2, h3, h4, p { margin: 0; }
 .banner-copy h2 { font: 500 48px/1 var(--serif); display: flex; align-items: center; gap: 12px; }
 .banner-copy h2 .i { width: 30px; height: 30px; color: var(--red); }
 .banner-copy p { font: 400 16px/1.5 var(--sans); color: var(--body); max-width: 560px; }
-.banner-media img { width: 100%; height: 100%; object-fit: cover; }
+.banner-media img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; } /* photos fade to white; multiply turns that into the sand bg */
 .banner .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
 
 /* ---------- Home ---------- */
